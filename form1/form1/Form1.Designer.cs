@@ -49,11 +49,12 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lbKategorier = new System.Windows.Forms.ListBox();
+            this.lblNyKategori = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnKategorierTaBort
             // 
-            this.btnKategorierTaBort.Location = new System.Drawing.Point(813, 350);
+            this.btnKategorierTaBort.Location = new System.Drawing.Point(928, 304);
             this.btnKategorierTaBort.Name = "btnKategorierTaBort";
             this.btnKategorierTaBort.Size = new System.Drawing.Size(78, 23);
             this.btnKategorierTaBort.TabIndex = 40;
@@ -63,7 +64,7 @@
             // 
             // btnKategorierLaggTill
             // 
-            this.btnKategorierLaggTill.Location = new System.Drawing.Point(732, 350);
+            this.btnKategorierLaggTill.Location = new System.Drawing.Point(836, 304);
             this.btnKategorierLaggTill.Name = "btnKategorierLaggTill";
             this.btnKategorierLaggTill.Size = new System.Drawing.Size(75, 23);
             this.btnKategorierLaggTill.TabIndex = 39;
@@ -73,9 +74,9 @@
             // 
             // tbKategorier
             // 
-            this.tbKategorier.Location = new System.Drawing.Point(648, 309);
+            this.tbKategorier.Location = new System.Drawing.Point(716, 307);
             this.tbKategorier.Name = "tbKategorier";
-            this.tbKategorier.Size = new System.Drawing.Size(358, 20);
+            this.tbKategorier.Size = new System.Drawing.Size(90, 20);
             this.tbKategorier.TabIndex = 36;
             // 
             // lblKategorier
@@ -226,11 +227,21 @@
             this.lbKategorier.Size = new System.Drawing.Size(355, 251);
             this.lbKategorier.TabIndex = 41;
             // 
+            // lblNyKategori
+            // 
+            this.lblNyKategori.AutoSize = true;
+            this.lblNyKategori.Location = new System.Drawing.Point(651, 313);
+            this.lblNyKategori.Name = "lblNyKategori";
+            this.lblNyKategori.Size = new System.Drawing.Size(64, 13);
+            this.lblNyKategori.TabIndex = 42;
+            this.lblNyKategori.Text = "Ny kategori:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 599);
+            this.Controls.Add(this.lblNyKategori);
             this.Controls.Add(this.lbKategorier);
             this.Controls.Add(this.btnKategorierTaBort);
             this.Controls.Add(this.btnKategorierLaggTill);
@@ -279,6 +290,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ListBox lbKategorier;
+        private System.Windows.Forms.Label lblNyKategori;
     }
 }
 

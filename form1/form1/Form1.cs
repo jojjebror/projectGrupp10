@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace form1
@@ -29,32 +23,43 @@ namespace form1
                 lbKategorier.Items.Add(item);
             }
             
-
-
         }
+
+        
 
 
 
         private void btnKategorierLaggTill_Click(object sender, EventArgs e)
         {
-            listaKategorier.Add(tbKategorier.Text);
-            tbKategorier.Clear();
-            LaggTillKategorier();
+            if (string.IsNullOrWhiteSpace(tbKategorier.Text)) 
+            {
+                MessageBox.Show("Skriv in en kategori");
+
+            }
+            else
+            {
+                listaKategorier.Add(tbKategorier.Text);
+
+                tbKategorier.Clear();
+                LaggTillKategorier();
+
+            }
             
         }
 
         private void btnKategorierTaBort_Click(object sender, EventArgs e)
         {
-            
             if (lbKategorier.Items.Count>0)
             {
-                
-                lbKategorier.Items.Remove(lbKategorier.SelectedItems[0]);
-                
+                lbKategorier.Items.RemoveAt(0);
+                listaKategorier.RemoveAt(0);
             }
-        }
+         }
+
         
     }
+        
+    
 
 
 }
