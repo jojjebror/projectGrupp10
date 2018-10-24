@@ -7,6 +7,9 @@ namespace form1
     public partial class Form1 : Form
     {
         List<string> listaKategorier;
+        string selectedItemText;
+        int selectedIndex;
+
         public Form1()
         {
             InitializeComponent();
@@ -31,6 +34,7 @@ namespace form1
 
         private void btnKategorierLaggTill_Click(object sender, EventArgs e)
         {
+            
             if (string.IsNullOrWhiteSpace(tbKategorier.Text)) 
             {
                 MessageBox.Show("Skriv in en kategori");
@@ -38,6 +42,7 @@ namespace form1
             }
             else
             {
+                comboBox2.Items.Add(tbKategorier.Text);
                 listaKategorier.Add(tbKategorier.Text);
 
                 tbKategorier.Clear();
@@ -56,7 +61,10 @@ namespace form1
             }
          }
 
-        
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
         
     
