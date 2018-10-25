@@ -32,7 +32,7 @@
             this.btnKategorierLaggTill = new System.Windows.Forms.Button();
             this.tbKategorier = new System.Windows.Forms.TextBox();
             this.lblKategorier = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtInfo = new System.Windows.Forms.RichTextBox();
             this.lblAvsnitt = new System.Windows.Forms.Label();
             this.listView2 = new System.Windows.Forms.ListView();
             this.btnTaBort = new System.Windows.Forms.Button();
@@ -43,14 +43,15 @@
             this.lblFrekvens = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.lblUrl = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.txbUrl = new System.Windows.Forms.TextBox();
+            this.lvPodcast = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lbKategorier = new System.Windows.Forms.ListBox();
             this.lblNyKategori = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.lkLank = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnKategorierTaBort
@@ -89,13 +90,13 @@
             this.lblKategorier.TabIndex = 35;
             this.lblKategorier.Text = "Kategorier";
             // 
-            // richTextBox1
+            // rtInfo
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(648, 388);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(358, 155);
-            this.richTextBox1.TabIndex = 33;
-            this.richTextBox1.Text = "";
+            this.rtInfo.Location = new System.Drawing.Point(648, 388);
+            this.rtInfo.Name = "rtInfo";
+            this.rtInfo.Size = new System.Drawing.Size(358, 155);
+            this.rtInfo.TabIndex = 33;
+            this.rtInfo.Text = "";
             // 
             // lblAvsnitt
             // 
@@ -141,6 +142,7 @@
             this.btnSok.TabIndex = 28;
             this.btnSok.Text = "Sök";
             this.btnSok.UseVisualStyleBackColor = true;
+            this.btnSok.Click += new System.EventHandler(this.btnSok_Click_1);
             // 
             // lblKategori
             // 
@@ -187,25 +189,26 @@
             this.lblUrl.TabIndex = 23;
             this.lblUrl.Text = "URL:";
             // 
-            // textBox1
+            // txbUrl
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 243);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(161, 20);
-            this.textBox1.TabIndex = 22;
+            this.txbUrl.Location = new System.Drawing.Point(12, 243);
+            this.txbUrl.Name = "txbUrl";
+            this.txbUrl.Size = new System.Drawing.Size(161, 20);
+            this.txbUrl.TabIndex = 22;
             // 
-            // listView1
+            // lvPodcast
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvPodcast.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.listView1.Location = new System.Drawing.Point(12, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(598, 192);
-            this.listView1.TabIndex = 21;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvPodcast.Location = new System.Drawing.Point(12, 12);
+            this.lvPodcast.Name = "lvPodcast";
+            this.lvPodcast.Size = new System.Drawing.Size(598, 192);
+            this.lvPodcast.TabIndex = 21;
+            this.lvPodcast.UseCompatibleStateImageBehavior = false;
+            this.lvPodcast.View = System.Windows.Forms.View.Details;
+            this.lvPodcast.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvPodcast_ItemSelectionChanged);
             // 
             // columnHeader1
             // 
@@ -249,11 +252,23 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // lkLank
+            // 
+            this.lkLank.AutoSize = true;
+            this.lkLank.Location = new System.Drawing.Point(17, 566);
+            this.lkLank.Name = "lkLank";
+            this.lkLank.Size = new System.Drawing.Size(55, 13);
+            this.lkLank.TabIndex = 44;
+            this.lkLank.TabStop = true;
+            this.lkLank.Text = "linkLabel1";
+            this.lkLank.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkLank_LinkClicked_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 561);
+            this.ClientSize = new System.Drawing.Size(1017, 585);
+            this.Controls.Add(this.lkLank);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblNyKategori);
             this.Controls.Add(this.lbKategorier);
@@ -261,7 +276,7 @@
             this.Controls.Add(this.btnKategorierLaggTill);
             this.Controls.Add(this.tbKategorier);
             this.Controls.Add(this.lblKategorier);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.rtInfo);
             this.Controls.Add(this.lblAvsnitt);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.btnTaBort);
@@ -272,8 +287,8 @@
             this.Controls.Add(this.lblFrekvens);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblUrl);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.txbUrl);
+            this.Controls.Add(this.lvPodcast);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -287,7 +302,7 @@
         private System.Windows.Forms.Button btnKategorierLaggTill;
         private System.Windows.Forms.TextBox tbKategorier;
         private System.Windows.Forms.Label lblKategorier;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtInfo;
         private System.Windows.Forms.Label lblAvsnitt;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Button btnTaBort;
@@ -298,14 +313,15 @@
         private System.Windows.Forms.Label lblFrekvens;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label lblUrl;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.TextBox txbUrl;
+        private System.Windows.Forms.ListView lvPodcast;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ListBox lbKategorier;
         private System.Windows.Forms.Label lblNyKategori;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel lkLank;
     }
 }
 
