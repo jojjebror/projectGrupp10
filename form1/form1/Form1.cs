@@ -30,7 +30,7 @@ namespace form1
             System.Xml.XmlDocument rssDoc = new System.Xml.XmlDocument();
             rssDoc.Load(rssStream);
             System.Xml.XmlNodeList rssItems = rssDoc.SelectNodes("rss/channel/item");
-            String[,] tempRssData = new string[500, 500];
+            String[,] tempRssData = new string[500, 4];
             for (int i = 0; i < rssItems.Count; i++)
             {
                 System.Xml.XmlNode rssNode;
@@ -68,31 +68,27 @@ namespace form1
 
         private void lkLank_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (rssData[lvPodcast.SelectedItems.Count, 2] != null)
-                System.Diagnostics.Process.Start(rssData[lvPodcast.SelectedItems.Count, 2]);
+            if (rssData[listBox1.SelectedIndex, 2] != null)
+                System.Diagnostics.Process.Start(rssData[listBox1.SelectedIndex, 2]);
         }
 
 
 
-        private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            if (rssData[lvPodcast.SelectedItems.Count, 1] != null)
-                rtInfo.Text = rssData[lvPodcast.SelectedItems.Count, 1];
-            if (rssData[lvPodcast.SelectedItems.Count, 2] != null)
-                lkLank.Text = "Go to " + rssData[lvPodcast.SelectedItems.Count, 0];
-        }
+        
 
         private void btnSok_Click_1(object sender, EventArgs e)
         {
             {
-                lvPodcast.Items.Clear();
+                listBox1.Items.Clear();
                 rssData = getRssData(txbUrl.Text);
                 for (int i = 0; i < rssData.GetLength(0); i++)
                 {
                     if (rssData[i, 0] != null)
                     {
-                        lvPodcast.Items.Add(rssData[i, 0]);
+                        listBox1.Items.Add(rssData[i, 0]);
+                        
                     }
+                    listBox1.SelectedIndex = 0;
                     
                 }
             }
@@ -109,10 +105,7 @@ namespace form1
 
         }
 
-
-
-
-
+        
         private void btnKategorierLaggTill_Click(object sender, EventArgs e)
         {
 
@@ -139,15 +132,19 @@ namespace form1
             {
                 lbKategorier.Items.RemoveAt(0);
                 listaKategorier.RemoveAt(0);
+                
             }
         }
 
-        
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rssData[listBox1.SelectedIndex, 1] != null)
+                rtInfo.Text = rssData[listBox1.SelectedIndex, 1];
+            if (rssData[listBox1.SelectedIndex, 2] != null)
+                lkLank.Text = "Go to " + rssData[listBox1.SelectedIndex, 0];
+        }
     }
 
 
-        
-    
-
-
+     
 }
