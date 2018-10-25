@@ -32,7 +32,7 @@
             this.btnKategorierLaggTill = new System.Windows.Forms.Button();
             this.tbKategorier = new System.Windows.Forms.TextBox();
             this.lblKategorier = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtInfo = new System.Windows.Forms.RichTextBox();
             this.lblAvsnitt = new System.Windows.Forms.Label();
             this.listView2 = new System.Windows.Forms.ListView();
             this.btnTaBort = new System.Windows.Forms.Button();
@@ -43,14 +43,14 @@
             this.lblFrekvens = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.lblUrl = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.txbUrl = new System.Windows.Forms.TextBox();
+            this.lvPodcast = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lbKategorier = new System.Windows.Forms.ListBox();
             this.lblNyKategori = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lkLank = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnKategorierTaBort
@@ -93,14 +93,14 @@
             this.lblKategorier.TabIndex = 35;
             this.lblKategorier.Text = "Kategorier";
             // 
-            // richTextBox1
+            // rtInfo
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(972, 597);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(535, 236);
-            this.richTextBox1.TabIndex = 33;
-            this.richTextBox1.Text = "";
+            this.rtInfo.Location = new System.Drawing.Point(972, 597);
+            this.rtInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rtInfo.Name = "rtInfo";
+            this.rtInfo.Size = new System.Drawing.Size(535, 236);
+            this.rtInfo.TabIndex = 33;
+            this.rtInfo.Text = "";
             // 
             // lblAvsnitt
             // 
@@ -151,6 +151,7 @@
             this.btnSok.TabIndex = 28;
             this.btnSok.Text = "Sök";
             this.btnSok.UseVisualStyleBackColor = true;
+            this.btnSok.Click += new System.EventHandler(this.btnSok_Click);
             // 
             // lblKategori
             // 
@@ -172,7 +173,6 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(180, 28);
             this.comboBox2.TabIndex = 26;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // lblFrekvens
             // 
@@ -203,27 +203,28 @@
             this.lblUrl.TabIndex = 23;
             this.lblUrl.Text = "URL:";
             // 
-            // textBox1
+            // txbUrl
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 374);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(240, 26);
-            this.textBox1.TabIndex = 22;
+            this.txbUrl.Location = new System.Drawing.Point(18, 374);
+            this.txbUrl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txbUrl.Name = "txbUrl";
+            this.txbUrl.Size = new System.Drawing.Size(240, 26);
+            this.txbUrl.TabIndex = 22;
             // 
-            // listView1
+            // lvPodcast
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvPodcast.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.listView1.Location = new System.Drawing.Point(18, 18);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(895, 293);
-            this.listView1.TabIndex = 21;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvPodcast.LabelEdit = true;
+            this.lvPodcast.Location = new System.Drawing.Point(18, 18);
+            this.lvPodcast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lvPodcast.Name = "lvPodcast";
+            this.lvPodcast.Size = new System.Drawing.Size(895, 293);
+            this.lvPodcast.TabIndex = 21;
+            this.lvPodcast.UseCompatibleStateImageBehavior = false;
+            this.lvPodcast.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -260,28 +261,29 @@
             this.lblNyKategori.TabIndex = 42;
             this.lblNyKategori.Text = "Ny kategori:";
             // 
-            // button1
+            // lkLank
             // 
-            this.button1.Location = new System.Drawing.Point(199, 509);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 43;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.lkLank.AutoSize = true;
+            this.lkLank.Location = new System.Drawing.Point(968, 870);
+            this.lkLank.Name = "lkLank";
+            this.lkLank.Size = new System.Drawing.Size(44, 20);
+            this.lkLank.TabIndex = 43;
+            this.lkLank.TabStop = true;
+            this.lkLank.Text = "Länk";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1572, 922);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lkLank);
             this.Controls.Add(this.lblNyKategori);
             this.Controls.Add(this.lbKategorier);
             this.Controls.Add(this.btnKategorierTaBort);
             this.Controls.Add(this.btnKategorierLaggTill);
             this.Controls.Add(this.tbKategorier);
             this.Controls.Add(this.lblKategorier);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.rtInfo);
             this.Controls.Add(this.lblAvsnitt);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.btnTaBort);
@@ -292,8 +294,8 @@
             this.Controls.Add(this.lblFrekvens);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblUrl);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.txbUrl);
+            this.Controls.Add(this.lvPodcast);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -308,7 +310,7 @@
         private System.Windows.Forms.Button btnKategorierLaggTill;
         private System.Windows.Forms.TextBox tbKategorier;
         private System.Windows.Forms.Label lblKategorier;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtInfo;
         private System.Windows.Forms.Label lblAvsnitt;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Button btnTaBort;
@@ -319,14 +321,14 @@
         private System.Windows.Forms.Label lblFrekvens;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label lblUrl;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.TextBox txbUrl;
+        private System.Windows.Forms.ListView lvPodcast;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ListBox lbKategorier;
         private System.Windows.Forms.Label lblNyKategori;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel lkLank;
     }
 }
 
