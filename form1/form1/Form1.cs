@@ -7,8 +7,7 @@ namespace form1
     public partial class Form1 : Form
     {
         List<string> listaKategorier;
-        string selectedItemText;
-        int selectedIndex;
+        
 
         public Form1()
         {
