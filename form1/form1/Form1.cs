@@ -145,7 +145,7 @@ namespace form1
                 {
                     lvPodcast.Items.Add(rssData[i, 1]);
                 }
-                lvPodcast.SelectedItems = 0; 
+                
             }
 
         }
