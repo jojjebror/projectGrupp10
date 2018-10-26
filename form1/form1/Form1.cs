@@ -82,9 +82,25 @@ namespace form1
                 System.Diagnostics.Process.Start(rssData[lvPodcast.SelectedItems.Count, 2]);
         }
 
+        private void btnSok_Click(object sender, EventArgs e)
+        {
+            lvPodcast.Items.Clear();
+            rssData = getRssData(txbUrl.Text);
+            for (int i = 0; i < rssData.GetLength(0); i++)
+            {
+                if (rssData[i, 0] != null)
+                {
+                    lvPodcast.Items.Add(rssData[i, 0]);
 
+                }
+                if (rssData[i, 1] != null)
+                {
+                    lvPodcast.Items.Add(rssData[i, 1]);
+                }
 
+            }
 
+        }
 
         private void LaggTillKategorier()
         {
@@ -130,25 +146,7 @@ namespace form1
 
        
 
-        private void btnSok_Click(object sender, EventArgs e)
-        {
-            lvPodcast.Items.Clear();
-            rssData = getRssData(txbUrl.Text);
-            for (int i = 0; i < rssData.GetLength(0); i++)
-            {
-                if (rssData[i, 0] != null)
-                {
-                    lvPodcast.Items.Add(rssData[i, 0]);
-                   
-                }
-                if(rssData[i, 1] != null)
-                {
-                    lvPodcast.Items.Add(rssData[i, 1]);
-                }
-                
-            }
-
-        }
+     
 
 
 
