@@ -61,15 +61,6 @@ namespace form1
                 {
                     tempRssData[i, 2] = "";
                 }
-                rssNode = rssItems.Item(i).SelectSingleNode("pubDate");
-                if (rssNode != null)
-                {
-                    tempRssData[i, 3] = rssNode.InnerText;
-                }
-                else
-                {
-                    tempRssData[i, 3] = "";
-                }
             }
             return tempRssData;
         }
@@ -95,8 +86,7 @@ namespace form1
                     if (rssData[i, 0] != null)
                     {
                         listBox1.Items.Add(rssData[i, 0]);
-                        listView2.Items.Add(rssData[i, 3]);
-
+                        
                     }
                     listBox1.SelectedIndex = 0;
                     
