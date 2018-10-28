@@ -21,7 +21,7 @@ namespace form1
             rssDoc.Load(rssStream);
             System.Xml.XmlNodeList rssItems = rssDoc.SelectNodes("rss/channel");
             System.Xml.XmlNodeList rssAvsnitt = rssDoc.SelectNodes("rss/channel/item");
-            String[,] tempRssData = new string[500, 5];
+            String[,] tempRssData = new string[500, 10];
 
             for (int i = 0; i < rssItems.Count; i++)
             {
@@ -36,8 +36,17 @@ namespace form1
                 {
                     tempRssData[i, 0] = "";
                 }
-                
-                
+                rssNode = rssItems.Item(i).SelectSingleNode("pubDate");
+                if (rssNode != null)
+                {
+                    tempRssData[i, 5] = rssNode.InnerText;
+                }
+                else
+                {
+                    tempRssData[i, 5] = "";
+                }
+
+
 
             }
             System.Xml.XmlNode rsNode;
@@ -70,6 +79,7 @@ namespace form1
                 {
                     tempRssData[i, 2] = "";
                 }
+                
 
             }
             return tempRssData;

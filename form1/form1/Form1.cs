@@ -47,17 +47,16 @@ namespace form1
                     if (dataInput.rssData[i, 0] != null)
                     {
                         
-                        lbFeed.Items.Add(dataInput.rssData[i, 0] +    " avsnitt");
+                        lbFeed.Items.Add(dataInput.rssData[i, 0]);
                         
-                        
-                        
-
                         
                     }
                     lbFeed.SelectedIndex = 0;
                     
                     
                 }
+                lbAvsnitt.Items.Clear();
+
                 for (int i = 0; i < dataInput.rssData.GetLength(0); i++)
                 {
                    
@@ -65,13 +64,30 @@ namespace form1
                     if (dataInput.rssData[i, 4] != null)
                     {
                         lbAvsnitt.Items.Add(dataInput.rssData[i, 4]);
-                     
+                        labelAvsnitt.Text = "Antal Avsnitt: "+lbAvsnitt.Items.Count.ToString();
+
+
                     }
                     lbAvsnitt.SelectedIndex = 0;
                    
 
                 }
-                
+                lbBox.Items.Clear();
+
+                for (int i = 0; i < dataInput.rssData.GetLength(0); i++)
+                {
+
+
+                    if (dataInput.rssData[i, 5] != null)
+                    {
+                        lbBox.Items.Add(dataInput.rssData[i, 5]);
+
+                    }
+                    lbBox.SelectedIndex = 0;
+
+
+                }
+
             }
         }
         private void LaggTillKategorier()
@@ -124,7 +140,9 @@ namespace form1
                 lkLank.Text = "Go to " + dataInput.rssData[lbFeed.SelectedIndex, 0];
             if (dataInput.rssData[lbFeed.SelectedIndex, 1] != null)
                 lbAvsnitt.Text = dataInput.rssData[lbFeed.SelectedIndex, 3];
-        
+            labelAvsnitt.Text = "Antal Avsnitt: "+lbAvsnitt.Items.Count.ToString();
+
+
         }
 
       
@@ -133,6 +151,7 @@ namespace form1
         {
             if (dataInput.rssData[lbAvsnitt.SelectedIndex, 4] != null)
                 rtInfo.Text = dataInput.rssData[lbAvsnitt.SelectedIndex, 1];
+                
         }
     }
 
