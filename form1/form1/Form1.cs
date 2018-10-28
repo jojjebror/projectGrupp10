@@ -64,10 +64,10 @@ namespace form1
                      
                     if (dataInput.rssData[i, 4] != null)
                     {
-                        lbDatum.Items.Add(dataInput.rssData[i, 4]);
+                        lbAvsnitt.Items.Add(dataInput.rssData[i, 4]);
                      
                     }
-                    lbDatum.SelectedIndex = 0;
+                    lbAvsnitt.SelectedIndex = 0;
                    
 
                 }
@@ -123,14 +123,16 @@ namespace form1
             if (dataInput.rssData[lbFeed.SelectedIndex, 2] != null)
                 lkLank.Text = "Go to " + dataInput.rssData[lbFeed.SelectedIndex, 0];
             if (dataInput.rssData[lbFeed.SelectedIndex, 1] != null)
-                lbDatum.Text = dataInput.rssData[lbFeed.SelectedIndex, 3];
+                lbAvsnitt.Text = dataInput.rssData[lbFeed.SelectedIndex, 3];
         
         }
 
-        private void lbDatum_SelectedIndexChanged(object sender, EventArgs e)
+      
+
+        private void lbAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dataInput.rssData[lbDatum.SelectedIndex, 4] != null)
-                rtInfo.Text = dataInput.rssData[lbDatum.SelectedIndex, 1];
+            if (dataInput.rssData[lbAvsnitt.SelectedIndex, 4] != null)
+                rtInfo.Text = dataInput.rssData[lbAvsnitt.SelectedIndex, 1];
         }
     }
 
