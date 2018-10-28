@@ -13,7 +13,8 @@ namespace form1
     public partial class Form1 : Form
     {
         List<string> listaKategorier;
-        
+        Class1 dataInput = new Class1();
+        Validering vali = new Validering();
 
         public Form1()
         {
@@ -21,55 +22,14 @@ namespace form1
             this.listaKategorier = new List<string>();
         }
 
-        String[,] rssData = null;
-        private String[,] getRssData(String channel)
-        {
-            System.Net.WebRequest myRequest = System.Net.WebRequest.Create(channel);
-            System.Net.WebResponse myResponse = myRequest.GetResponse();
-            System.IO.Stream rssStream = myResponse.GetResponseStream();
-            System.Xml.XmlDocument rssDoc = new System.Xml.XmlDocument();
-            rssDoc.Load(rssStream);
-            System.Xml.XmlNodeList rssItems = rssDoc.SelectNodes("rss/channel/item");
-            String[,] tempRssData = new string[500, 4];
-            for (int i = 0; i < rssItems.Count; i++)
-            {
-                System.Xml.XmlNode rssNode;
-                rssNode = rssItems.Item(i).SelectSingleNode("title");
-                if (rssNode != null)
-                {
-                    tempRssData[i, 0] = rssNode.InnerText;
-                }
-                else
-                {
-                    tempRssData[i, 0] = "";
-                }
-                rssNode = rssItems.Item(i).SelectSingleNode("description");
-                if (rssNode != null)
-                {
-                    tempRssData[i, 1] = rssNode.InnerText;
-                }
-                else
-                {
-                    tempRssData[i, 1] = "";
-                }
-                rssNode = rssItems.Item(i).SelectSingleNode("link");
-                if (rssNode != null)
-                {
-                    tempRssData[i, 2] = rssNode.InnerText;
-                }
-                else
-                {
-                    tempRssData[i, 2] = "";
-                }
-            }
-            return tempRssData;
-        }
+        
+        
 
 
-        private void lkLank_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+       private void lkLank_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (rssData[listBox1.SelectedIndex, 2] != null)
-                System.Diagnostics.Process.Start(rssData[listBox1.SelectedIndex, 2]);
+            if (dataInput.rssData[lbFeed.SelectedIndex, 2] != null)
+                System.Diagnostics.Process.Start(dataInput.rssData[lbFeed.SelectedIndex, 2]);
         }
 
 
@@ -78,19 +38,40 @@ namespace form1
 
         private void btnSok_Click_1(object sender, EventArgs e)
         {
+            
             {
-                listBox1.Items.Clear();
-                rssData = getRssData(txbUrl.Text);
-                for (int i = 0; i < rssData.GetLength(0); i++)
+                lbFeed.Items.Clear();
+                dataInput.rssData = dataInput.getRssData(txbUrl.Text);
+                for (int i = 0; i < dataInput.rssData.GetLength(0); i++)
                 {
-                    if (rssData[i, 0] != null)
+                    if (dataInput.rssData[i, 0] != null)
                     {
-                        listBox1.Items.Add(rssData[i, 0]);
+                        
+                        lbFeed.Items.Add(dataInput.rssData[i, 0] +    " avsnitt");
+                        
+                        
+                        
+
                         
                     }
-                    listBox1.SelectedIndex = 0;
+                    lbFeed.SelectedIndex = 0;
+                    
                     
                 }
+                for (int i = 0; i < dataInput.rssData.GetLength(0); i++)
+                {
+                   
+                     
+                    if (dataInput.rssData[i, 4] != null)
+                    {
+                        lbDatum.Items.Add(dataInput.rssData[i, 4]);
+                     
+                    }
+                    lbDatum.SelectedIndex = 0;
+                   
+
+                }
+                
             }
         }
         private void LaggTillKategorier()
@@ -111,7 +92,7 @@ namespace form1
 
             if (string.IsNullOrWhiteSpace(tbKategorier.Text))
             {
-                MessageBox.Show("Skriv in en kategori");
+                vali.valideraKategori();
 
             }
             else
@@ -136,14 +117,23 @@ namespace form1
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void lbFeed_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (rssData[listBox1.SelectedIndex, 1] != null)
-                rtInfo.Text = rssData[listBox1.SelectedIndex, 1];
-            if (rssData[listBox1.SelectedIndex, 2] != null)
-                lkLank.Text = "Go to " + rssData[listBox1.SelectedIndex, 0];
+            
+            if (dataInput.rssData[lbFeed.SelectedIndex, 2] != null)
+                lkLank.Text = "Go to " + dataInput.rssData[lbFeed.SelectedIndex, 0];
+            if (dataInput.rssData[lbFeed.SelectedIndex, 1] != null)
+                lbDatum.Text = dataInput.rssData[lbFeed.SelectedIndex, 3];
+        
+        }
+
+        private void lbDatum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dataInput.rssData[lbDatum.SelectedIndex, 4] != null)
+                rtInfo.Text = dataInput.rssData[lbDatum.SelectedIndex, 1];
         }
     }
+
 
 
      
