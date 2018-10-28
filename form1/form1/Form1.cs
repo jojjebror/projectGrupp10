@@ -46,10 +46,11 @@ namespace form1
                 {
                     if (dataInput.rssData[i, 0] != null)
                     {
-                        lbFeed.Items.Add(dataInput.rssData[i, 0]);
                         
-                        lbDatum.Items.Add(dataInput.rssData[i, 3]);
-
+                        lbFeed.Items.Add(dataInput.rssData[i, 0] +    " avsnitt");
+                        
+                        
+                        
 
                         
                     }
@@ -57,6 +58,20 @@ namespace form1
                     
                     
                 }
+                for (int i = 0; i < dataInput.rssData.GetLength(0); i++)
+                {
+                   
+                     
+                    if (dataInput.rssData[i, 4] != null)
+                    {
+                        lbDatum.Items.Add(dataInput.rssData[i, 4]);
+                     
+                    }
+                    lbDatum.SelectedIndex = 0;
+                   
+
+                }
+                
             }
         }
         private void LaggTillKategorier()
@@ -104,13 +119,18 @@ namespace form1
 
         private void lbFeed_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dataInput.rssData[lbFeed.SelectedIndex, 1] != null)
-                rtInfo.Text = dataInput.rssData[lbFeed.SelectedIndex, 1];
+            
             if (dataInput.rssData[lbFeed.SelectedIndex, 2] != null)
                 lkLank.Text = "Go to " + dataInput.rssData[lbFeed.SelectedIndex, 0];
             if (dataInput.rssData[lbFeed.SelectedIndex, 1] != null)
                 lbDatum.Text = dataInput.rssData[lbFeed.SelectedIndex, 3];
         
+        }
+
+        private void lbDatum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dataInput.rssData[lbDatum.SelectedIndex, 4] != null)
+                rtInfo.Text = dataInput.rssData[lbDatum.SelectedIndex, 1];
         }
     }
 

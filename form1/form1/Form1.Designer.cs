@@ -259,6 +259,7 @@
             this.lbDatum.Name = "lbDatum";
             this.lbDatum.Size = new System.Drawing.Size(507, 224);
             this.lbDatum.TabIndex = 47;
+            this.lbDatum.SelectedIndexChanged += new System.EventHandler(this.lbDatum_SelectedIndexChanged);
             // 
             // Form1
             // 
