@@ -8,6 +8,7 @@ namespace form1
 {
     class Class1
     {
+
         public String[,] rssData = null;
 
         public String[,] getRssData(String channel)
@@ -25,7 +26,7 @@ namespace form1
 
             for (int i = 0; i < rssItems.Count; i++)
             {
-
+                
                 System.Xml.XmlNode rssNode;
                 rssNode = rssItems.Item(i).SelectSingleNode("title");
                 if (rssNode != null)

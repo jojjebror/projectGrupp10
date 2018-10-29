@@ -9,10 +9,15 @@ namespace form1
 {
     public class Validering
     {
+        
         public void valideraKategori()
         {
             MessageBox.Show("Skriv in en kategori");
-
+            
+          
         }
+
+        
+
     }
 }
