@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
+
 namespace form1
 {
     public partial class Form1 : Form
@@ -16,16 +17,15 @@ namespace form1
         List<string> listaKategorier;
         Class1 dataInput = new Class1();
         Validering vali = new Validering();
+        FileManager files = new FileManager();
+        Podcasts newPod = new Podcasts();
 
         public Form1()
         {
             InitializeComponent();
             this.listaKategorier = new List<string>();
         }
-
         
-        
-
 
        public void lkLank_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -34,10 +34,10 @@ namespace form1
             
         }
 
+        
 
 
         
-
         public void btnSok_Click_1(object sender, EventArgs e)
         {
             
@@ -136,9 +136,15 @@ namespace form1
                 tbKategorier.Clear();
                 LaggTillKategorier();
                 tbKategorier.Focus();
-
+                
             }
 
+        }
+
+        public void kiss()
+        {
+            
+            
         }
 
         public void btnKategorierTaBort_Click(object sender, EventArgs e)
@@ -159,8 +165,7 @@ namespace form1
             if (dataInput.rssData[lbFeed.SelectedIndex, 1] != null)
                 lbAvsnitt.Text = dataInput.rssData[lbFeed.SelectedIndex, 3];
             labelAvsnitt.Text = "Antal Avsnitt: "+lbAvsnitt.Items.Count.ToString();
-
-
+            
         }
 
 
@@ -174,20 +179,10 @@ namespace form1
 
         public void btnSpara_Click(object sender, EventArgs e)
         {
-            XmlTextWriter xwriter = new XmlTextWriter("savefile.xml", Encoding.Unicode);
-            xwriter.WriteStartDocument();
-            xwriter.WriteStartElement("Podcast");
-            xwriter.WriteStartElement("title");
-            xwriter.WriteEndElement();
-            foreach (String item in lbFeed.Items)
-            {
-                xwriter.WriteStartElement("Item");
-                xwriter.WriteString(item);
-                xwriter.WriteEndElement();
-            }
-            xwriter.WriteEndElement();
-            xwriter.WriteEndDocument();
-            xwriter.Close();
+            string url = txbUrl.Text;
+            
+            files.feedList.Add(new Podcasts(url));
+            files.SaveFeed();
         }
 
         
@@ -197,6 +192,17 @@ namespace form1
             txbUrl.Clear();
             txbUrl.Focus();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            files.GetFeed();
+            foreach (var item in files.feedList )
+            {
+                listView1.Items.Add(item.url);
+            }
+        }
+
+        
     }
 
 

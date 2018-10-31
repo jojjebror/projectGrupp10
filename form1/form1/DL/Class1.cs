@@ -8,7 +8,7 @@ namespace form1
 {
     class Class1
     {
-
+        System.Xml.XmlDocument rssDoc = new System.Xml.XmlDocument();
         public String[,] rssData = null;
 
         public String[,] getRssData(String channel)
@@ -26,7 +26,8 @@ namespace form1
 
             for (int i = 0; i < rssItems.Count; i++)
             {
-                
+                string title;
+
                 System.Xml.XmlNode rssNode;
                 rssNode = rssItems.Item(i).SelectSingleNode("title");
                 if (rssNode != null)
@@ -53,6 +54,7 @@ namespace form1
             System.Xml.XmlNode rsNode;
             for (int i = 0; i<rssAvsnitt.Count; i++)
             {
+
                 rsNode = rssAvsnitt.Item(i).SelectSingleNode("title");
                 if (rsNode != null)
                 {
