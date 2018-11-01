@@ -21,7 +21,7 @@ namespace form1
         }
         public ListViewItem ToListViewItem()
         {
-            ListViewItem ViewItem = new ListViewItem(new[] {title, category });
+            ListViewItem ViewItem = new ListViewItem(new[] {title });
             ViewItem.Tag = this;
             return ViewItem;
         }

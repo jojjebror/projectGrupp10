@@ -125,28 +125,7 @@ namespace form1
         }
 
 
-        public void btnKategorierLaggTill_Click(object sender, EventArgs e)
-        {
-            cbKategori.Items.Clear();
-            if (string.IsNullOrWhiteSpace(tbKategorier.Text))
-            {
-                vali.valideraSpara();
-                return;
-            }
-
-
-            string category = tbKategorier.Text;
-            string comboBox = lbKategorier.Text;
-            files2.kategoriLista.Add(new Podcasts2(category));
-            files2.SaveFeed2();
-            update2();
-            
-            
-            
-            tbKategorier.Clear();
-            
-            tbKategorier.Focus();
-        }
+        
 
         
 
@@ -194,10 +173,35 @@ namespace form1
             files.feedList.Add(new Podcasts(url, title));
             files.SaveFeed();
             update();
+            update2();
             
         }
 
-        
+        public void btnKategorierLaggTill_Click(object sender, EventArgs e)
+        {
+            cbKategori.Items.Clear();
+            if (string.IsNullOrWhiteSpace(tbKategorier.Text))
+            {
+                vali.valideraSpara();
+                return;
+            }
+
+
+            string category = tbKategorier.Text;
+            string comboBox = lbKategorier.Text;
+            files2.kategoriLista.Add(new Podcasts2(category));
+            files2.SaveFeed2();
+            update3();
+
+
+
+
+            tbKategorier.Clear();
+
+            tbKategorier.Focus();
+        }
+
+
 
         private void btnRensa_Click(object sender, EventArgs e)
         {
@@ -212,23 +216,12 @@ namespace form1
         {
             files2.GetFeed2();
             files.GetFeed();
-            update();
             update2();
+            update();
             
-        }
-
-        public void update2()
-        {
-            lbKategorier.Items.Clear();
-            foreach (var item in files2.kategoriLista)
-            {
-                lbKategorier.Items.Add(item.category);
-                cbKategori.Items.Add(item.category);
-            }
+            update3();
             
-
-
-
+            
         }
 
         public void update()
@@ -239,9 +232,33 @@ namespace form1
 
                 listView1.Items.Add(item.ToListViewItem());
 
-                
+
             }
         }
+
+        public void update2()
+        {
+            listView2.Items.Clear();
+            foreach (var item in files2.kategoriLista)
+            {
+
+                listView2.Items.Add(item.ToListViewItem2());
+
+
+            }
+            
+        }
+        public void update3()
+        {
+            lbKategorier.Items.Clear();
+            foreach (var item in files2.kategoriLista)
+            {
+                lbKategorier.Items.Add(item.category);
+                cbKategori.Items.Add(item.category);
+            }
+        }
+
+        
 
         private void btnTaBort_Click(object sender, EventArgs e)
         {

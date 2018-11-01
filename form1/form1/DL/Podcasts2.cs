@@ -19,8 +19,13 @@ namespace form1
         {
 
         }
+        public ListViewItem ToListViewItem2()
+        {
+            ListViewItem ViewItem = new ListViewItem(new[] { category });
+            ViewItem.Tag = this;
+            return ViewItem;
+        }
 
-        
 
         public Podcasts2(string category)
         {
