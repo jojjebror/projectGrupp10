@@ -54,7 +54,9 @@
     <Compile Include="BLL\Virtual.cs" />
     <Compile Include="DL\Class1.cs" />
     <Compile Include="DL\FileManager.cs" />
+    <Compile Include="DL\FileManager2.cs" />
     <Compile Include="DL\Podcasts.cs" />
+    <Compile Include="DL\Podcasts2.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

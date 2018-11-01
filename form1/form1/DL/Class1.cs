@@ -26,7 +26,7 @@ namespace form1
 
             for (int i = 0; i < rssItems.Count; i++)
             {
-                string title;
+                
 
                 System.Xml.XmlNode rssNode;
                 rssNode = rssItems.Item(i).SelectSingleNode("title");

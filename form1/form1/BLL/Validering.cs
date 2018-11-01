@@ -14,6 +14,7 @@ namespace form1
 
     public class Validering:Virtual
     {
+        
 
         public static bool TryParseFeed(string url)
         {
@@ -42,9 +43,16 @@ namespace form1
             
         }
 
-        
+        public void valideraSpara()
+        {
+            MessageBox.Show("Skriv in en kategori!");
+        }
 
         
+
+
+
+
 
     }
 }

@@ -54,6 +54,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnRensa = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // btnKategorierTaBort
@@ -123,6 +125,7 @@
             this.btnTaBort.TabIndex = 30;
             this.btnTaBort.Text = "Ta Bort...";
             this.btnTaBort.UseVisualStyleBackColor = true;
+            this.btnTaBort.Click += new System.EventHandler(this.btnTaBort_Click);
             // 
             // btnSpara
             // 
@@ -159,8 +162,6 @@
             // cbKategori
             // 
             this.cbKategori.FormattingEnabled = true;
-            this.cbKategori.Items.AddRange(new object[] {
-            "Mode"});
             this.cbKategori.Location = new System.Drawing.Point(459, 374);
             this.cbKategori.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbKategori.Name = "cbKategori";
@@ -251,7 +252,7 @@
             // 
             this.lbBox.FormattingEnabled = true;
             this.lbBox.ItemHeight = 20;
-            this.lbBox.Location = new System.Drawing.Point(412, 38);
+            this.lbBox.Location = new System.Drawing.Point(404, 38);
             this.lbBox.Name = "lbBox";
             this.lbBox.Size = new System.Drawing.Size(265, 224);
             this.lbBox.TabIndex = 46;
@@ -275,6 +276,10 @@
             this.labelAvsnitt.TabIndex = 48;
             this.labelAvsnitt.Text = "label1";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            // 
             // btnRensa
             // 
             this.btnRensa.Location = new System.Drawing.Point(20, 431);
@@ -288,11 +293,28 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(980, 110);
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(720, 45);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(310, 97);
+            this.listView1.Size = new System.Drawing.Size(667, 195);
             this.listView1.TabIndex = 50;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Titel";
+            this.columnHeader1.Width = 246;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Kategori";
+            this.columnHeader2.Width = 220;
             // 
             // Form1
             // 
@@ -359,6 +381,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnRensa;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 
