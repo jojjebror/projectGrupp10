@@ -21,7 +21,7 @@ namespace form1
         }
         public ListViewItem ToListViewItem()
         {
-            ListViewItem ViewItem = new ListViewItem(new[] {title });
+            ListViewItem ViewItem = new ListViewItem(new[] {title, category });
             ViewItem.Tag = this;
             return ViewItem;
         }
@@ -29,7 +29,7 @@ namespace form1
 
       
 
-        public Podcasts( string url, string title)
+        public Podcasts( string url, string title, string category)
         {
             this.interval = interval;
             this.url = url;

@@ -123,23 +123,7 @@ namespace form1
             
             
         }
-
-
         
-
-        
-
-        public void btnKategorierTaBort_Click(object sender, EventArgs e)
-        {
-            /*if (lbKategorier.Items.Count > 0)
-            {
-                listaKategorier.RemoveAt(lbKategorier.SelectedIndex);
-                TaBortKategori();
-                
-            }*/
-
-
-        }
 
         public void lbFeed_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -169,8 +153,9 @@ namespace form1
             
             string url = txbUrl.Text;
             string title = lbFeed.Text;
+            string category = cbKategori.Text;
             
-            files.feedList.Add(new Podcasts(url, title));
+            files.feedList.Add(new Podcasts(url, title, category));
             files.SaveFeed();
             update();
             update2();
@@ -191,7 +176,8 @@ namespace form1
             string comboBox = lbKategorier.Text;
             files2.kategoriLista.Add(new Podcasts2(category));
             files2.SaveFeed2();
-            update3();
+            update2();
+            
 
 
 
@@ -219,7 +205,7 @@ namespace form1
             update2();
             update();
             
-            update3();
+            
             
             
         }
@@ -243,20 +229,12 @@ namespace form1
             {
 
                 listView2.Items.Add(item.ToListViewItem2());
-
+                cbKategori.Items.Add(item.category);
 
             }
             
         }
-        public void update3()
-        {
-            lbKategorier.Items.Clear();
-            foreach (var item in files2.kategoriLista)
-            {
-                lbKategorier.Items.Add(item.category);
-                cbKategori.Items.Add(item.category);
-            }
-        }
+        
 
         
 
@@ -269,6 +247,17 @@ namespace form1
             lbFeed.Items.Clear();
             lbAvsnitt.Items.Clear();
             rtInfo.Clear();
+
+        }
+
+        public void btnKategorierTaBort_Click(object sender, EventArgs e)
+        {
+            cbKategori.Items.Clear();
+            Podcasts2 pod2 = (Podcasts2)listView2.SelectedItems[0].Tag;
+            files2.kategoriLista.Remove(pod2);
+            files2.SaveFeed2();
+            update2();
+
 
         }
 
@@ -336,7 +325,5 @@ namespace form1
 
 
 
-     //skapa ny lista för kategorier,gör en klass också. Kopiera sen xml skiten från filemanager men byt
-     //ut adressen! sen kopplar du knappen lägg till som ett event där du lägger in listan
-     //och lägger in items. gör en ny klass med interfacet serialize!
+     
 }
