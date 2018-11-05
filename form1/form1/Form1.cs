@@ -46,12 +46,13 @@ namespace form1
             }
         }
 
-        
+        //cbInterval.SelectedIndex >-1
 
 
         
         public void btnSok_Click_1(object sender, EventArgs e)
         {
+            
             try
             {
                 lbFeed.Items.Clear();
@@ -60,7 +61,7 @@ namespace form1
                 {
                     if (dataInput.rssData[i, 0] != null)
                     {
-                        
+
                         lbFeed.Items.Add(dataInput.rssData[i, 0]);
                         
                         
@@ -132,15 +133,33 @@ namespace form1
 
         public void btnSpara_Click(object sender, EventArgs e)
         {
+            if (txbUrl.Equals("")) 
+            {
+                vali.valideraSparaUtanUrl();
+                return;
+            }
+            if (lbFeed.Text.Equals(""))
+            {
+                vali.valideraSparaUtanAttSoka();
+                return;
+            }
+
+            if (cbInterval.SelectedItem == null || cbKategori.SelectedItem == null)
+            {
+                vali.valideraSparaUtanFrekvensEllerKategori();
+                return;
+            }
             
             
 
-            
+
+
             string url = txbUrl.Text;
             string title = lbFeed.Text;
             string category = cbKategori.Text;
+            string interval = cbInterval.Text;
             
-            files.feedList.Add(new Podcasts(url, title, category));
+            files.feedList.Add(new Podcasts(url, title, category, interval));
             files.SaveFeed();
             update();
             update2();
@@ -190,7 +209,14 @@ namespace form1
 
         public async Task btnRensa_ClickAsync()
         {
+            
             await Task.Delay(1000);
+            rtInfo.Clear();
+            lbAvsnitt.Items.Clear();
+            lbFeed.Items.Clear();
+            lbBox.Items.Clear();
+            labelAvsnitt.ResetText();
+            lkLank.ResetText();
             txbUrl.Clear();
             txbUrl.Focus();
             
@@ -347,6 +373,7 @@ namespace form1
         }
 
         
+        
 
         private void btnAndra_Click(object sender, EventArgs e)
         {
@@ -397,15 +424,7 @@ namespace form1
             
         }
 
-        private void btnChangeInterval_Click(object sender, EventArgs e)
-        {
-            string interval = cbInterval.Text;
-            string category = cbKategori.Text;
-            if (lbFeed.SelectedItems.Count==1)
-            {
-                
-            }
-        }
+        
 
         
 
@@ -429,6 +448,30 @@ namespace form1
         {
             timer.Stop();
             
+        }
+
+        private void btnAndraPod_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string pickedPod = listView1.SelectedItems[0].Text;
+                string newPodName = tbAndraPod.Text;
+                foreach (var x in files.feedList)
+                {
+                    if (x.title == pickedPod)
+                    {
+                        x.title = newPodName;
+                    }
+
+                }
+                update();
+                files.SaveFeed();
+                tbAndraPod.Clear();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                vali.valideraAndraPodNamn();
+            }
         }
     }
 

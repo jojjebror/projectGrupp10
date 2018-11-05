@@ -39,6 +39,30 @@ namespace form1
             MessageBox.Show("Ogiltig rssfeed");
         }
 
+        public void valideraSparaUtanFrekvensEllerKategori()
+        {
+            MessageBox.Show("Du har missat att välja frekvens eller kategori!");
+
+        }
+        public void valideraSparaUtanUrl()
+        {
+            MessageBox.Show("Du har missat att välja frekvens eller kategori!");
+
+        }
+        public void valideraSparaUtanAttSoka()
+        {
+            MessageBox.Show("Vänligen sök på en url innan du sparar!");
+
+        }
+
+        public void valideraAndraPodNamn()
+        {
+            MessageBox.Show("Välj en pod i listan du vill byta namn på!");
+
+        }
+
+
+
 
 
 
@@ -81,6 +105,7 @@ namespace form1
 
         }
 
+        
 
 
 

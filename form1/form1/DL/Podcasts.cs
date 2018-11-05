@@ -24,7 +24,7 @@ namespace form1
         }
         public ListViewItem ToListViewItem()
         {
-            ListViewItem ViewItem = new ListViewItem(new[] {title, category });
+            ListViewItem ViewItem = new ListViewItem(new[] {title, category, interval });
             ViewItem.Tag = this;
             return ViewItem;
         }
@@ -32,7 +32,7 @@ namespace form1
 
       
 
-        public Podcasts( string url, string title, string category)
+        public Podcasts( string url, string title, string category, string interval)
         {
             this.interval = interval;
             this.url = url;
@@ -48,15 +48,15 @@ namespace form1
         {
             if(interval == "5 minuter")
             {
-                return 5;
+                return 300;
                 
             }else if (interval == "10 minuter")
             {
-                return 10;
+                return 600;
             }
             else if (interval == "15 minuter")
             {
-                return 15;
+                return 900;
             }
             return 1000;
         }
