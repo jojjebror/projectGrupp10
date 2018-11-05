@@ -10,6 +10,7 @@ namespace form1
 {
     public class FileManager
     {
+        Class1 c1 = new Class1();
         public List<Podcasts> feedList = new List<Podcasts>();
         
         public FileManager()
@@ -23,6 +24,7 @@ namespace form1
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Podcasts>));
                 serializer.Serialize(fs, feedList);
+               
             }
         }
         
@@ -34,6 +36,12 @@ namespace form1
             {
                 feedList = (List<Podcasts>)serializer.Deserialize(fs);
             }
+        }
+
+        public void getFeedList(string url)
+        {
+            Podcasts pod = new Podcasts();
+            c1.rssData = c1.getRssData(pod.url);
         }
     }
 }

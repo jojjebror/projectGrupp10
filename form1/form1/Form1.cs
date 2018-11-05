@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
+
 namespace form1
 {
     public partial class Form1 : Form
@@ -22,6 +23,7 @@ namespace form1
         Podcasts newPod = new Podcasts();
         Podcasts2 newPod2 = new Podcasts2();
         FileManager2 files2 = new FileManager2();
+        Timer timer = new Timer();
 
         public Form1()
         {
@@ -33,9 +35,15 @@ namespace form1
 
        public void lkLank_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (dataInput.rssData[lbFeed.SelectedIndex, 2] != null)
-                System.Diagnostics.Process.Start(dataInput.rssData[lbFeed.SelectedIndex, 2]);
-            
+            try
+            {
+                if (dataInput.rssData[lbFeed.SelectedIndex, 2] != null)
+                    System.Diagnostics.Process.Start(dataInput.rssData[lbFeed.SelectedIndex, 2]);
+            }
+            catch (NullReferenceException)
+            {
+                vali.valideraLink();
+            }
         }
 
         
@@ -44,7 +52,7 @@ namespace form1
         
         public void btnSok_Click_1(object sender, EventArgs e)
         {
-            
+            try
             {
                 lbFeed.Items.Clear();
                 dataInput.rssData = dataInput.getRssData(txbUrl.Text);
@@ -95,36 +103,13 @@ namespace form1
                 }
 
             }
-        }
-        public void LaggTillKategorier()
-        {
-            lbKategorier.Items.Clear();
-
-
-            foreach (var item in listaKategorier)
+            catch (Exception)
             {
-                lbKategorier.Items.Add(item);
+                vali.valideraUrl();
             }
-            
-
-        }
-
-        public void TaBortKategori()
-        {
-            if (lbKategorier.SelectedItems.Count != 0)
-            {
-                while (lbKategorier.SelectedIndex != -1)
-                {
-                    cbKategori.Items.Remove(lbKategorier.SelectedItem);
-                    lbKategorier.Items.RemoveAt(lbKategorier.SelectedIndex);
-                }
-            }
-            
-            
-            
         }
         
-
+        
         public void lbFeed_SelectedIndexChanged(object sender, EventArgs e)
         {
             
@@ -164,6 +149,12 @@ namespace form1
 
         public void btnKategorierLaggTill_Click(object sender, EventArgs e)
         {
+            if (listView2.FindItemWithText(tbKategorier.Text) != null)
+            {
+                vali.valideraLaggTillKategori();
+                return;
+            }
+
             cbKategori.Items.Clear();
             if (string.IsNullOrWhiteSpace(tbKategorier.Text))
             {
@@ -173,7 +164,7 @@ namespace form1
 
 
             string category = tbKategorier.Text;
-            string comboBox = lbKategorier.Text;
+            string comboBox = listView2.Text;
             files2.kategoriLista.Add(new Podcasts2(category));
             files2.SaveFeed2();
             update2();
@@ -189,10 +180,17 @@ namespace form1
 
 
 
-        private void btnRensa_Click(object sender, EventArgs e)
+        private async void btnRensa_Click(object sender, EventArgs e)
         {
+
+
+            await btnRensa_ClickAsync();
             
-            
+        }
+
+        public async Task btnRensa_ClickAsync()
+        {
+            await Task.Delay(1000);
             txbUrl.Clear();
             txbUrl.Focus();
             
@@ -200,6 +198,8 @@ namespace form1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+            FillInterval();
             files2.GetFeed2();
             files.GetFeed();
             update2();
@@ -224,6 +224,7 @@ namespace form1
 
         public void update2()
         {
+            cbKategori.Items.Clear();
             listView2.Items.Clear();
             foreach (var item in files2.kategoriLista)
             {
@@ -234,31 +235,54 @@ namespace form1
             }
             
         }
+
+        public void update3()
+        {
+            foreach (var item in files2.kategoriLista)
+            {
+
+                
+                cbKategori.Items.Add(item.category);
+
+            }
+        }
         
 
         
 
         private void btnTaBort_Click(object sender, EventArgs e)
         {
-            Podcasts pod = (Podcasts)listView1.SelectedItems[0].Tag;
-            files.feedList.Remove(pod);
-            files.SaveFeed();
-            update();
-            lbFeed.Items.Clear();
-            lbAvsnitt.Items.Clear();
-            rtInfo.Clear();
-
+            try
+            {
+                Podcasts pod = (Podcasts)listView1.SelectedItems[0].Tag;
+                files.feedList.Remove(pod);
+                files.SaveFeed();
+                update();
+                lbFeed.Items.Clear();
+                lbAvsnitt.Items.Clear();
+                rtInfo.Clear();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                vali.valideraTaBort();
+            }
         }
 
         public void btnKategorierTaBort_Click(object sender, EventArgs e)
         {
-            cbKategori.Items.Clear();
-            Podcasts2 pod2 = (Podcasts2)listView2.SelectedItems[0].Tag;
-            files2.kategoriLista.Remove(pod2);
-            files2.SaveFeed2();
-            update2();
-
-
+            try
+            {
+                cbKategori.Items.Clear();
+                Podcasts2 pod2 = (Podcasts2)listView2.SelectedItems[0].Tag;
+                files2.kategoriLista.Remove(pod2);
+                files2.SaveFeed2();
+                update2();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                vali.valideraTaBortKategori();
+            }
+            
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -319,6 +343,91 @@ namespace form1
                 }
             }
 
+            
+        }
+
+        
+
+        private void btnAndra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string pickedCategory = listView2.SelectedItems[0].Text;
+                string newCategoryName = tbKategorier.Text;
+                foreach (var x in files2.kategoriLista)
+                {
+                    if (x.category == pickedCategory)
+                    {
+                        x.category = newCategoryName;
+                    }
+
+                }
+                update2();
+                files2.SaveFeed2();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                vali.valideraAndraKategori();
+            }
+
+        }
+
+        
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lvSorteradePods.Items.Clear();
+            if (listView2.SelectedItems.Count == 1)
+            {
+                string pickedCategory = listView2.SelectedItems[0].Text;
+                var podcast = files.feedList.Where(s => s.category == pickedCategory).ToList();
+                foreach (var x in podcast)
+                {
+                    lvSorteradePods.Items.Add(x.ToListViewItem());
+                }
+            }
+        }
+
+        private void FillInterval()
+        {
+            cbInterval.Items.Add("5 minuter");
+            cbInterval.Items.Add("10 minuter");
+            cbInterval.Items.Add("15 minuter");
+            
+            
+        }
+
+        private void btnChangeInterval_Click(object sender, EventArgs e)
+        {
+            string interval = cbInterval.Text;
+            string category = cbKategori.Text;
+            if (lbFeed.SelectedItems.Count==1)
+            {
+                
+            }
+        }
+
+        
+
+        public void cbInterval_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var interval = cbInterval.SelectedItem.ToString();
+
+            timer.Interval = (newPod.Interval(interval) * 1000);
+            timer.Tick += new EventHandler(timer1_Tick);
+            timer.Start();
+            timer.Stop();
+            timer.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            btnSok_Click_1(sender, e);
+        }
+
+        public void button1_Click(object sender, EventArgs e)
+        {
+            timer.Stop();
             
         }
     }

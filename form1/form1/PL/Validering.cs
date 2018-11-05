@@ -16,7 +16,7 @@ namespace form1
     {
         
 
-        public static bool TryParseFeed(string url)
+        public bool TryParseFeed(string url)
         {
             try
             {
@@ -27,11 +27,16 @@ namespace form1
                 }
                 return true;
             }
-            catch (Exception)
+            catch (System.UriFormatException)
             {
                 MessageBox.Show("Ogiltig rssfeed");
                 return false;
             }
+        }
+
+        public void valideraUrl()
+        {
+            MessageBox.Show("Ogiltig rssfeed");
         }
 
 
@@ -39,6 +44,7 @@ namespace form1
 
         public override void valideraKategori()
         {
+
             MessageBox.Show("Skriv in en kategori");
             
         }
@@ -48,7 +54,37 @@ namespace form1
             MessageBox.Show("Skriv in en kategori!");
         }
 
-        
+        public void valideraTaBort()
+        {
+            MessageBox.Show("Välj en podcast som ska tas bort!");
+        }
+
+        public void valideraTaBortKategori()
+        {
+            MessageBox.Show("Välj en kategori som ska tas bort!");
+
+        }
+        public void valideraAndraKategori()
+        {
+            MessageBox.Show("Välj en kategori som ska ändras!");
+
+        }
+        public void valideraLink()
+        {
+            MessageBox.Show("Skriv in en URL och tryck sök först!");
+
+        }
+
+        public void valideraLaggTillKategori()
+        {
+            MessageBox.Show("Kategorin finns redan i listan ovan!");
+
+        }
+
+
+
+
+
 
 
 

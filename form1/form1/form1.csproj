@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Validering.cs" />
+    <Compile Include="PL\Validering.cs" />
     <Compile Include="BLL\Virtual.cs" />
     <Compile Include="DL\Class1.cs" />
     <Compile Include="DL\FileManager.cs" />
@@ -91,8 +91,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

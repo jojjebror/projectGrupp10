@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace form1
@@ -14,6 +15,8 @@ namespace form1
         public string title { get; set; }
         public string url { get; set; }
         public string category { get; set; }
+
+        
         
         public Podcasts()
         {
@@ -38,6 +41,25 @@ namespace form1
         }
         
         
+
+        
+
+        public int Interval(string interval)
+        {
+            if(interval == "5 minuter")
+            {
+                return 5;
+                
+            }else if (interval == "10 minuter")
+            {
+                return 10;
+            }
+            else if (interval == "15 minuter")
+            {
+                return 15;
+            }
+            return 1000;
+        }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

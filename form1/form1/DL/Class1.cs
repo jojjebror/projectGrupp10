@@ -49,7 +49,6 @@ namespace form1
                 }
 
 
-
             }
             System.Xml.XmlNode rsNode;
             for (int i = 0; i<rssAvsnitt.Count; i++)
@@ -87,5 +86,7 @@ namespace form1
             }
             return tempRssData;
         }
+
+        
     }
 }
