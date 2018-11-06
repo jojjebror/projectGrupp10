@@ -30,6 +30,12 @@ namespace form1
             
             InitializeComponent();
             this.listaKategorier = new List<string>();
+            var url = txbUrl.Text;
+            var interval = cbInterval.Text;
+            var kategori = cbKategori.Text;
+            var kategorierAndra = tbKategorier.Text;
+
+
         }
         
 
@@ -46,7 +52,7 @@ namespace form1
             }
         }
 
-        //cbInterval.SelectedIndex >-1
+       
 
 
         
@@ -133,14 +139,14 @@ namespace form1
 
         public void btnSpara_Click(object sender, EventArgs e)
         {
-            if (txbUrl.Equals("")) 
+            if (txbUrl.Text.Equals("")) 
             {
-                vali.valideraSparaUtanUrl();
+                vali.valideraSparaUtanAttSoka();
                 return;
             }
             if (lbFeed.Text.Equals(""))
             {
-                vali.valideraSparaUtanAttSoka();
+                
                 return;
             }
 
@@ -168,16 +174,19 @@ namespace form1
 
         public void btnKategorierLaggTill_Click(object sender, EventArgs e)
         {
+            
             if (listView2.FindItemWithText(tbKategorier.Text) != null)
             {
                 vali.valideraLaggTillKategori();
                 return;
             }
 
+
+            
             cbKategori.Items.Clear();
-            if (string.IsNullOrWhiteSpace(tbKategorier.Text))
+            if (string.IsNullOrEmpty(tbKategorier.Text))
             {
-                vali.valideraSpara();
+                vali.valideraKategori();
                 return;
             }
 
@@ -245,9 +254,11 @@ namespace form1
                 listView1.Items.Add(item.ToListViewItem());
 
 
+                timer.Interval = (Int32.Parse(item.interval) * 1000);
+                timer.Tick += new EventHandler(timer1_Tick);
+                timer.Start();
             }
         }
-
         public void update2()
         {
             cbKategori.Items.Clear();
@@ -280,6 +291,8 @@ namespace form1
         {
             try
             {
+                
+                
                 Podcasts pod = (Podcasts)listView1.SelectedItems[0].Tag;
                 files.feedList.Remove(pod);
                 files.SaveFeed();
@@ -291,6 +304,7 @@ namespace form1
             catch (ArgumentOutOfRangeException)
             {
                 vali.valideraTaBort();
+                return;
             }
         }
 
@@ -307,6 +321,7 @@ namespace form1
             catch (ArgumentOutOfRangeException)
             {
                 vali.valideraTaBortKategori();
+                return;
             }
             
         }
@@ -371,14 +386,13 @@ namespace form1
 
             
         }
-
         
-        
-
         private void btnAndra_Click(object sender, EventArgs e)
         {
             try
             {
+                var text = tbKategorier.Text;
+                vali.textFaltTomt(text, "Kategori");
                 string pickedCategory = listView2.SelectedItems[0].Text;
                 string newCategoryName = tbKategorier.Text;
                 foreach (var x in files2.kategoriLista)
@@ -392,9 +406,9 @@ namespace form1
                 update2();
                 files2.SaveFeed2();
             }
-            catch (ArgumentOutOfRangeException)
+            catch (ArgumentException fieldTomt)
             {
-                vali.valideraAndraKategori();
+                MessageBox.Show(fieldTomt.Message);
             }
 
         }
@@ -417,31 +431,21 @@ namespace form1
 
         private void FillInterval()
         {
-            cbInterval.Items.Add("5 minuter");
-            cbInterval.Items.Add("10 minuter");
-            cbInterval.Items.Add("15 minuter");
-            
+            cbInterval.Items.Add(5);
+            cbInterval.Items.Add(10);
+            cbInterval.Items.Add(15);
             
         }
-
         
-
-        
-
         public void cbInterval_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var interval = cbInterval.SelectedItem.ToString();
-
-            timer.Interval = (newPod.Interval(interval) * 1000);
-            timer.Tick += new EventHandler(timer1_Tick);
-            timer.Start();
-            timer.Stop();
-            timer.Start();
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            btnSok_Click_1(sender, e);
+            dataInput.getRssDataFromLocalXML();
+            
         }
 
         public void button1_Click(object sender, EventArgs e)
@@ -454,13 +458,16 @@ namespace form1
         {
             try
             {
+                var pod = tbAndraPod.Text;
+
+                vali.textFaltTomt(pod, " Podcast");
                 string pickedPod = listView1.SelectedItems[0].Text;
                 string newPodName = tbAndraPod.Text;
                 foreach (var x in files.feedList)
                 {
-                    if (x.title == pickedPod)
+                    if (x.interval == pickedPod)
                     {
-                        x.title = newPodName;
+                        x.interval = newPodName;
                     }
 
                 }
@@ -468,9 +475,9 @@ namespace form1
                 files.SaveFeed();
                 tbAndraPod.Clear();
             }
-            catch (ArgumentOutOfRangeException)
+            catch (ArgumentException fieldTomt)
             {
-                vali.valideraAndraPodNamn();
+                MessageBox.Show(fieldTomt.Message);
             }
         }
     }

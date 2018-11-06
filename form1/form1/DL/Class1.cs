@@ -26,7 +26,7 @@ namespace form1
 
             for (int i = 0; i < rssItems.Count; i++)
             {
-                
+
 
                 System.Xml.XmlNode rssNode;
                 rssNode = rssItems.Item(i).SelectSingleNode("title");
@@ -51,7 +51,7 @@ namespace form1
 
             }
             System.Xml.XmlNode rsNode;
-            for (int i = 0; i<rssAvsnitt.Count; i++)
+            for (int i = 0; i < rssAvsnitt.Count; i++)
             {
 
                 rsNode = rssAvsnitt.Item(i).SelectSingleNode("title");
@@ -81,12 +81,85 @@ namespace form1
                 {
                     tempRssData[i, 2] = "";
                 }
-                
+
 
             }
             return tempRssData;
         }
 
-        
+        public String[,] getRssDataFromLocalXML()
+        {
+
+            System.Xml.XmlDocument rssDoc = new System.Xml.XmlDocument();
+            rssDoc.Load(@"C:\Users\johan\source\repos\jojjebror\projectGrupp10\form1\form1\bin\Debug\RSSfeed.xml");
+            System.Xml.XmlNodeList rssItems = rssDoc.SelectNodes("Podcasts");
+            System.Xml.XmlNodeList rssAvsnitt = rssDoc.SelectNodes("rss/channel/item");
+            String[,] tempRssData = new string[500, 10];
+
+            for (int i = 0; i < rssItems.Count; i++)
+            {
+
+
+                System.Xml.XmlNode rssNode;
+                rssNode = rssItems.Item(i).SelectSingleNode("title");
+                if (rssNode != null)
+                {
+                    tempRssData[i, 0] = rssNode.InnerText;
+                }
+                else
+                {
+                    tempRssData[i, 0] = "";
+                }
+                rssNode = rssItems.Item(i).SelectSingleNode("pubDate");
+                if (rssNode != null)
+                {
+                    tempRssData[i, 5] = rssNode.InnerText;
+                }
+                else
+                {
+                    tempRssData[i, 5] = "";
+                }
+
+
+            }
+            System.Xml.XmlNode rsNode;
+            for (int i = 0; i < rssAvsnitt.Count; i++)
+            {
+
+                rsNode = rssAvsnitt.Item(i).SelectSingleNode("title");
+                if (rsNode != null)
+                {
+                    tempRssData[i, 4] = rsNode.InnerText;
+                }
+                else
+                {
+                    tempRssData[i, 4] = "";
+                }
+                rsNode = rssAvsnitt.Item(i).SelectSingleNode("description");
+                if (rsNode != null)
+                {
+                    tempRssData[i, 1] = rsNode.InnerText;
+                }
+                else
+                {
+                    tempRssData[i, 1] = "";
+                }
+                rsNode = rssAvsnitt.Item(i).SelectSingleNode("link");
+                if (rsNode != null)
+                {
+                    tempRssData[i, 2] = rsNode.InnerText;
+                }
+                else
+                {
+                    tempRssData[i, 2] = "";
+                }
+
+
+            }
+            return tempRssData;
+
+
+
+        }
     }
 }

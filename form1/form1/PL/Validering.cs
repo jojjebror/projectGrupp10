@@ -14,7 +14,21 @@ namespace form1
 
     public class Validering:Virtual
     {
-        
+        public void textFaltTomt(string field, string falt)
+        {
+            if (field == "")
+            {
+                ArgumentException fieldTomt = new ArgumentException(falt + " måste väljas!");
+                throw fieldTomt;
+            }
+
+        }
+
+
+
+
+
+
 
         public bool TryParseFeed(string url)
         {
@@ -61,16 +75,12 @@ namespace form1
 
         }
 
-
-
-
-
-
+        
         public override void valideraKategori()
         {
 
             MessageBox.Show("Skriv in en kategori");
-            
+
         }
 
         public void valideraSpara()
@@ -105,7 +115,7 @@ namespace form1
 
         }
 
-        
+
 
 
 

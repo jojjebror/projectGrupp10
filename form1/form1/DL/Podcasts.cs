@@ -44,22 +44,7 @@ namespace form1
 
         
 
-        public int Interval(string interval)
-        {
-            if(interval == "5 minuter")
-            {
-                return 300;
-                
-            }else if (interval == "10 minuter")
-            {
-                return 600;
-            }
-            else if (interval == "15 minuter")
-            {
-                return 900;
-            }
-            return 1000;
-        }
+        
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
