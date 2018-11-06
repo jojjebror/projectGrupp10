@@ -23,13 +23,7 @@ namespace form1
             }
 
         }
-
-
-
-
-
-
-
+        
         public bool TryParseFeed(string url)
         {
             try

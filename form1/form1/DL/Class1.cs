@@ -91,7 +91,7 @@ namespace form1
         {
 
             System.Xml.XmlDocument rssDoc = new System.Xml.XmlDocument();
-            rssDoc.Load(@"C:\Users\johan\source\repos\jojjebror\projectGrupp10\form1\form1\bin\Debug\RSSfeed.xml");
+            rssDoc.Load(@"C:\Users\jjoha\Documents\GitHub\projectGrupp10\form1\form1\bin\Debug\RSSfeed.xml");
             System.Xml.XmlNodeList rssItems = rssDoc.SelectNodes("Podcasts");
             System.Xml.XmlNodeList rssAvsnitt = rssDoc.SelectNodes("rss/channel/item");
             String[,] tempRssData = new string[500, 10];
